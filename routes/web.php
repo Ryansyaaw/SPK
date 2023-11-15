@@ -27,7 +27,7 @@ Route::prefix('/')->group (function () {
     Route::get('/user', function () {
         return view('dashboard.user');
     })->name('dashboard.user');
-    Route::get('/kandidat', function () {
-        return view('dashboard.kandidat');
-    })->name('dashboard.kandidat');
+    // Route::get('/kandidat', function () {
+    //     return view('dashboard.kandidat');
+    // })->name('dashboard.kandidat');
 });
