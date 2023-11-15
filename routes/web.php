@@ -24,10 +24,10 @@ Route::prefix('/')->group (function () {
     Route::get('/criteria', function () {
         return view('dashboard.criteria');
     })->name('dashboard.criteria');
-    Route::get('/user', function () {
-        return view('dashboard.user');
-    })->name('dashboard.user');
-    Route::get('/kandidat', function () {
-        return view('dashboard.kandidat');
-    })->name('dashboard.kandidat');
+    Route::get('/alternatif', function () {
+        return view('dashboard.alternatif');
+    })->name('dashboard.alternatif');
+    Route::get('/criteria', function () {
+        return view('dashboard.criteria');
+    })->name('dashboard.criteria');
 });
