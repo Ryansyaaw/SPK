@@ -24,6 +24,9 @@ Route::prefix('/')->group (function () {
     Route::get('/criteria', function () {
         return view('dashboard.criteria');
     })->name('dashboard.criteria');
+    Route::get('/alternatif', function () {
+        return view('dashboard.alternatif');
+    })->name('dashboard.alternatif');
     Route::get('/user', function () {
         return view('dashboard.user');
     })->name('dashboard.user');
