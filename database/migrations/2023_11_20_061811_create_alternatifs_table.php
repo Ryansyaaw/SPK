@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('alternatifs', function (Blueprint $table) {
             $table->id();
-            $table->string('criteria_code');
-            $table->string('criteria_name');
-            $table->string('criteria_type');
-            $table->double('weight');
+            $table->string('alternatif_code');
+            $table->string('alternatif_name');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('alternatifs');
     }
 };

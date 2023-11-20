@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\criteria_controller;
+use App\Http\Controllers\AlternatifController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +24,12 @@ Route::prefix('/')->group (function () {
         return view('dashboard.home');
     })->name('dashboard.home');
 
-    Route::get('/criteria', function () {
-        return view('dashboard.criteria');
-    })->name('dashboard.criteria');
-    Route::get('/alternatif', function () {
-        return view('dashboard.alternatif');
-    })->name('dashboard.alternatif');
-    Route::get('/criteria', function () {
-        return view('dashboard.criteria');
-    })->name('dashboard.criteria');
+    // Route::get('/criteria', function () {
+    //     return view('dashboard.criteria');
+    // })->name('dashboard.criteria');
+    Route::resource('criteria', criteria_controller::class);
+    Route::resource('alternatif', AlternatifController::class);
+    // Route::get('/alternatif', function () {
+    //     return view('dashboard.alternatif');
+    // })->name('dashboard.alternatif');
 });
