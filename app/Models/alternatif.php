@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class criteria extends Model
+class alternatif extends Model
 {
     use HasFactory;
-    protected $table = 'criterias';
+    protected $table = 'alternatifs';
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
-        'no',
-        'criteria_code',
-        'criteria_name',
-        'criteria_type',
-        'weight',
+        'id_alternatif',
+        'no_alternatif',
+        'alternatif_code',
+        'alternatif_name',
     ];
 }
