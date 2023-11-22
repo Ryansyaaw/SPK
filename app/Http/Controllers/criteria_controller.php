@@ -13,7 +13,7 @@ class criteria_controller extends Controller
      */
     public function index()
     {
-        $criteria = criteria::all();
+        $criteria = criteria::orderBy('criteria_code', 'asc')->get();
         return view('dashboard.criteria ', compact('criteria'));
     }
 
