@@ -12,11 +12,17 @@ class criteria extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
         'no',
         'criteria_code',
         'criteria_name',
         'criteria_type',
         'weight',
     ];
+    public function penilaian(){
+        return $this->hasMany(penilaian::class, 'id_criteria');
+    }
+
+    public function criteria(){
+        return $this->belongTo(criteria::class, 'criteria_id');
+    }
 }
