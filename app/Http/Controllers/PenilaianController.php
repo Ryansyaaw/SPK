@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\penilaian;
+use App\Http\Requests\PenilaianRequest;
+use App\Models\alternatif;
 use App\Models\criteria;
-use Illuminate\Http\Request;
-use App\Http\Requests\CriteriaRequest;
+use \Illuminate\Support\Facades\DB;
 
-class criteria_controller extends Controller
+class PenilaianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $criteria = criteria::orderBy('criteria_code', 'asc')->get();
-        return view('dashboard.criteria ', compact('criteria'));
+
+        $alternatif = alternatif::all();
+        $criteria = criteria::all();
+        $penilaian = Penilaian::with(['criteria', 'alternatif'])->get();
+        return view('dashboard.penilaian ', compact(['criteria', 'alternatif', 'penilaian']));
     }
 
     /**
@@ -28,17 +33,18 @@ class criteria_controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CriteriaRequest $request)
+    public function store(PenilaianRequest $request)
     {
-        $data = $request->validated();
-        criteria::create($data);
-        return redirect()-> back();
+        // $data = $request->validated();
+        // dd('data');
+        // penilaian::create($data);
+        // return redirect()-> back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(criteria $criteria)
+    public function show(penilaian $penilaian)
     {
         //
     }
@@ -46,7 +52,7 @@ class criteria_controller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(criteria $criteria)
+    public function edit(penilaian $penilaian)
     {
         //
     }
@@ -54,7 +60,7 @@ class criteria_controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CriteriaRequest $request, criteria $criteria)
+    public function update(UpdatepenilaianRequest $request, penilaian $penilaian)
     {
         $criteria = criteria::findOrFail($request->id);
         $data = $request->validated();
@@ -65,10 +71,8 @@ class criteria_controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $criteria)
+    public function destroy(penilaian $penilaian)
     {
-        criteria::find($criteria)->delete();
-        // $criteria->delete();
-        return redirect()-> back();
+        //
     }
 }
