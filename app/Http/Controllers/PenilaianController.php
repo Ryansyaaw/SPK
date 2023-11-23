@@ -6,6 +6,7 @@ use App\Models\penilaian;
 use App\Http\Requests\PenilaianRequest;
 use App\Models\alternatif;
 use App\Models\criteria;
+use \Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
@@ -14,16 +15,11 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-        // $join = DB::table('penilaians')
-        // ->join('alternatifs', 'penilaians.id_alternatif', '=', 'alternatifs.id')
-        // ->join('criterias', 'penilaians.id_criteria', '=', 'criterias.id')
-        // ->where('penilaians.id_alternatif', '=', $id_alternatif)
-        // ->select('penilaians.*', 'alternatifs.*', 'criterias.*')
-        // ->get();
+
         $alternatif = alternatif::all();
         $criteria = criteria::all();
-        $penilaian = penilaian::all();
-        return view('dashboard.penilaian ', compact(['criteria', 'alternatif', 'penilaian', 'join']));
+        $penilaian = Penilaian::with(['criteria', 'alternatif'])->get();
+        return view('dashboard.penilaian ', compact(['criteria', 'alternatif', 'penilaian']));
     }
 
     /**
@@ -39,10 +35,10 @@ class PenilaianController extends Controller
      */
     public function store(PenilaianRequest $request)
     {
-        $data = $request->validated();
-        dd('data');
-        penilaian::create($data);
-        return redirect()-> back();
+        // $data = $request->validated();
+        // dd('data');
+        // penilaian::create($data);
+        // return redirect()-> back();
     }
 
     /**
@@ -66,7 +62,10 @@ class PenilaianController extends Controller
      */
     public function update(UpdatepenilaianRequest $request, penilaian $penilaian)
     {
-        //
+        $criteria = criteria::findOrFail($request->id);
+        $data = $request->validated();
+        $criteria -> update($data);
+        return redirect()-> back();
     }
 
     /**

@@ -18,11 +18,11 @@ class criteria extends Model
         'criteria_type',
         'weight',
     ];
-    public function penilaian(){
-        return $this->hasMany(penilaian::class, 'id_criteria');
-    }
+    // public function penilaian(){
+    //     return $this->hasMany(penilaian::class, 'id_criteria');
+    // }
 
-    public function criteria(){
-        return $this->belongTo(criteria::class, 'criteria_id');
-    }
+    // public function criteria(){
+    //     return $this->belongTo(criteria::class, 'criteria_id');
+    // }
 }

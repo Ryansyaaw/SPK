@@ -13,5 +13,14 @@ class penilaian extends Model
 
     protected $guarded = [];
 
+    public function criteria()
+    {
+        return $this->belongsTo(criteria::class, 'id_criteria', 'id');
+    }
+
+    public function alternatif()
+    {
+        return $this->belongsTo(alternatif::class, 'id_alternatif', 'id');
+    }
 
 }

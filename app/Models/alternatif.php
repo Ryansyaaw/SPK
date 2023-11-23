@@ -17,7 +17,7 @@ class alternatif extends Model
         'alternatif_name',
     ];
 
-    public function penilaian(){
-        return $this->hasMany(penilaian::class, 'id_alternatif');
-    }
+    // public function penilaian(){
+    //     return $this->hasMany(penilaian::class, 'id_alternatif');
+    // }
 }
