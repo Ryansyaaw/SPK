@@ -35,10 +35,22 @@ class PenilaianController extends Controller
      */
     public function store(PenilaianRequest $request)
     {
-        // $data = $request->validated();
-        // dd('data');
-        // penilaian::create($data);
-        // return redirect()-> back();
+        $request->validate([
+            'id_alternatif' => 'required|exists:alternatifs,id',
+            'nilai.*' => 'required|numeric|min:0|between:0,99.99',
+        ]);
+
+        $idAlternatif = $request->input('id_alternatif');
+        $nilaiData = $request->input('nilai');
+
+        foreach ($nilaiData as $criteriaId => $nilai) {
+            Penilaian::updateOrCreate(
+                ['id_alternatif' => $idAlternatif, 'id_criteria' => $criteriaId],
+                ['nilai' => $nilai]
+            );
+        }
+
+        return redirect()->back()->with('success', 'Penilaian added successfully');
     }
 
     /**
@@ -62,10 +74,7 @@ class PenilaianController extends Controller
      */
     public function update(UpdatepenilaianRequest $request, penilaian $penilaian)
     {
-        $criteria = criteria::findOrFail($request->id);
-        $data = $request->validated();
-        $criteria -> update($data);
-        return redirect()-> back();
+        //
     }
 
     /**
