@@ -34,7 +34,7 @@
                                             class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <span
                                                 class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-80">
-                                                {{ $a->alternatif_name }}
+                                                {{ $a->alternatif_code }}
                                             </span>
                                         </td>
                                         @foreach ($criteria as $c)
@@ -58,9 +58,7 @@
                                         <td
                                             class="p-2 align-middle flex just bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <button type="button" data-modal-target="add-criterias-{{$a->id}}" data-modal-toggle="add-criterias-{{$a->id}}"
-                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
-                                            <button type="button"
-                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</button>
+                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mx-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</button>
                                         </td>
                                         <!-- Main modal -->
                                         <div id="add-criterias-{{ $a->id }}" tabindex="-1" aria-hidden="true"
@@ -98,7 +96,7 @@
                                                                         {{ $c->criteria_code }}
                                                                     </label>
                                                                     <input type="number" onchange="setTwoNumberDecimal" min="0" step="0.01"
-                                                                        value="0"
+                                                                        value="{{ $penilaianForCriteria ? $penilaianForCriteria->where('id_criteria', $c->id)->where('id_alternatif', $a->id)->first()->nilai : 0 }}"
                                                                         name="nilai[{{ $c->id }}]" id="nilai_{{ $c->id }}"
                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                                         placeholder="" required="">
