@@ -13,7 +13,7 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        $alternatif = alternatif::orderBy('alternatif_code', 'asc')->get();
+        $alternatif = alternatif::orderByRaw('LENGTH(alternatif_code), alternatif_code')->get();
         return view('dashboard.alternatif', compact('alternatif'));
     }
 

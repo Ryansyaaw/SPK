@@ -12,9 +12,12 @@ class alternatif extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id_alternatif',
         'no_alternatif',
         'alternatif_code',
         'alternatif_name',
     ];
+
+    // public function penilaian(){
+    //     return $this->hasMany(penilaian::class, 'id_alternatif');
+    // }
 }

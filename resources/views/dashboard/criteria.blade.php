@@ -6,7 +6,7 @@
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                 <div class="flex justify-between p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6 class="dark:text-white">Authors table</h6>
+                    <h6 class="dark:text-white">Criteria table</h6>
                     <button type="button" data-modal-target="add-criteria" data-modal-toggle="add-criteria"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add
                         Criteria</button>
@@ -57,7 +57,7 @@
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="weight"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bobot</label>
-                                        <input type="number" name="weight" id="weight"
+                                        <input onchange="setTwoNumberDecimal" min="0" step="0.01" value="0.00" type="number" name="weight" id="weight"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="eg. 20" required="">
                                     </div>
@@ -214,7 +214,7 @@
                                                                 <div class="col-span-2 sm:col-span-1">
                                                                     <label for="weight"
                                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bobot</label>
-                                                                    <input type="number" value="{{ $c->weight }}"
+                                                                    <input type="number" onchange="setTwoNumberDecimal" min="0" step="0.01" value="{{ $c->weight }}"
                                                                         name="weight" id="weight"
                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                                         placeholder="eg. 20" required="">
@@ -249,4 +249,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        myHTMLNumberInput.onchange = setTwoNumberDecimal;
+        function setTwoNumberDecimal(event) {
+            this.value = parseFloat(this.value).toFixed(2);
+        }
+    </script>
 @endsection
