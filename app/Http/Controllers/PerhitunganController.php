@@ -96,8 +96,27 @@ class PerhitunganController extends Controller
 
             $ranking[$a->id] = $formattedTotalValue;
         }
+         // Calculate ranking
+    $rankings = [];
+    foreach ($alternatif as $a) {
+        $totalRanking = 0;
+        foreach ($criteria as $c) {
+            $totalRanking += $vij[$c->id][$a->id - 1];
+        }
+        $rankings[$a->id] = $totalRanking;
+    }
 
-        // dd($tij, $vij, $q, $ranking);
+    // Sort rankings in descending order
+    arsort($rankings);
+
+    // Assign new rankings
+    $newRankings = [];
+    $rankingValue = 1;
+    foreach ($rankings as $alternatifId => $totalRanking) {
+        $newRankings[$alternatifId] = $rankingValue;
+        $rankingValue++;
+    }
+       // dd($tij, $vij, $q, $ranking);
 
         // Kirim data ke view
         return view('dashboard.perhitungan', [
@@ -106,6 +125,7 @@ class PerhitunganController extends Controller
             'predictionBoundary' => $g,
             'distanceMatrix' => $q,
             'ranking' => $ranking,
+            'rank'=> $newRankings,
             'criteria' => $criteria,
             'alternatif' => $alternatif,
             'penilaian' => $penilaian,
