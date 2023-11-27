@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\criteria_controller;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PerhitunganController;
 
 
 /*
@@ -31,6 +32,7 @@ Route::prefix('/')->group (function () {
     Route::resource('criteria', criteria_controller::class);
     Route::resource('alternatif', AlternatifController::class);
     Route::resource('penilaian', PenilaianController::class);
+    Route::resource('perhitungan', PerhitunganController::class);
     // Route::get('/alternatif', function () {
     //     return view('dashboard.alternatif');
     // })->name('dashboard.alternatif');
