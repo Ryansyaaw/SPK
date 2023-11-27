@@ -20,6 +20,9 @@ class PerhitunganController extends Controller
         $minXi = [];
         $tij = [];
         $vij = [];
+        $g = [];
+        $q = [];
+        $ranking = [];
 
         $desiredDecimalPlaces = 3; // Ganti dengan jumlah desimal yang diinginkan
 
@@ -36,9 +39,11 @@ class PerhitunganController extends Controller
                 $maxXi[$c->id] = max($values);
                 $minXi[$c->id] = min($values);
 
-                // Initialize $tij and $vij for the current $kriteriaId
+                // Initialize $tij, $vij, $g, $q, and $ranking for the current $kriteriaId
                 $tij[$c->id] = [];
                 $vij[$c->id] = [];
+                $g[$c->id] = 1;
+                $q[$c->id] = [];
 
                 // Normalisasi and Weighting
                 foreach ($values as $value) {
@@ -56,6 +61,7 @@ class PerhitunganController extends Controller
 
                     // Calculate the weighted value
                     $weightedValue = ($criteriaWeight * $normalizedValue) + $criteriaWeight;
+                    $g[$c->id] *= $weightedValue;
 
                     // Format the normalized value and weighted value with the desired decimal places
                     $formattedNormalizedValue = number_format($normalizedValue, $desiredDecimalPlaces);
@@ -64,14 +70,49 @@ class PerhitunganController extends Controller
                     $tij[$c->id][] = $formattedNormalizedValue;
                     $vij[$c->id][] = $formattedWeightedValue;
                 }
+
+                // Calculate the prediction boundary (g)
+                $g[$c->id] = pow($g[$c->id], 1 / count($alternatif));
+                $g[$c->id] = number_format($g[$c->id], $desiredDecimalPlaces);
+
+                // Calculate the distance matrix (q)
+                $q[$c->id] = array_map(function ($vijValue) use ($g, $c) {
+                    $desiredDecimalPlaces = 3;
+                    return number_format($vijValue - $g[$c->id], $desiredDecimalPlaces);
+                }, $vij[$c->id]);
             }
         }
 
-        // dd($tij, $vij);
+        // Calculate the ranking by summing up values per alternative
+        foreach ($alternatif as $a) {
+            $totalValue = 0;
+
+            foreach ($criteria as $c) {
+                $totalValue += $q[$c->id][$a->id - 1]; // Adjust index since the array starts from 0
+            }
+
+            // Format the total value with the desired decimal places
+            $formattedTotalValue = number_format($totalValue, $desiredDecimalPlaces);
+
+            $ranking[$a->id] = $formattedTotalValue;
+        }
+
+        // dd($tij, $vij, $q, $ranking);
 
         // Kirim data ke view
-        return view('dashboard.perhitungan', ['normalisasi' => $tij, 'weighted' => $vij, 'criteria' => $criteria, 'alternatif' => $alternatif, 'penilaian' => $penilaian]);
+        return view('dashboard.perhitungan', [
+            'normalisasi' => $tij,
+            'weighted' => $vij,
+            'predictionBoundary' => $g,
+            'distanceMatrix' => $q,
+            'ranking' => $ranking,
+            'criteria' => $criteria,
+            'alternatif' => $alternatif,
+            'penilaian' => $penilaian,
+        ]);
     }
+
+
 
 
 }
