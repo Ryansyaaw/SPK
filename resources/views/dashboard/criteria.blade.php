@@ -31,7 +31,7 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                     </svg>
-                                    <span class="sr-only">Close modal</span>
+                                    <span class="sr-only">Close</span>
                                 </button>
                             </div>
                             <!-- Modal body -->
@@ -80,7 +80,7 @@
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Add new Criteria
+                                    Add new criteria
                                 </button>
                             </form>
                         </div>
@@ -182,7 +182,7 @@
                                                                         stroke-linejoin="round" stroke-width="2"
                                                                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                                 </svg>
-                                                                <span class="sr-only">Close modal</span>
+                                                                <span class="sr-only">Close</span>
                                                             </button>
                                                         </div>
                                                         <!-- Modal body -->
@@ -256,4 +256,5 @@
             this.value = parseFloat(this.value).toFixed(2);
         }
     </script>
+    @include('dashboard.layouts.footer')
 @endsection
