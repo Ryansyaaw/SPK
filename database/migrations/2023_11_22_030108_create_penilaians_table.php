@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_alternatif');
-            $table->foreign('id_alternatif')->references('id')->on('alternatifs');
+            $table->foreign('id_alternatif')->references('id')->on('alternatifs')->onDelete('cascade');
 
             $table->unsignedBigInteger('id_criteria');
-            $table->foreign('id_criteria')->references('id')->on('criterias');
+            $table->foreign('id_criteria')->references('id')->on('criterias')->onDelete('cascade');
 
             $table->double('nilai');
         });
