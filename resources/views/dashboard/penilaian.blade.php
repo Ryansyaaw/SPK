@@ -6,7 +6,7 @@
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                 <div class="flex justify-between p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6 class="dark:text-white">Authors table</h6>
+                    <h6 class="dark:text-white">Matriks Keputusan (X)</h6>
                 </div>
                 <div class="flex-auto px-0 pt-0 pb-2">
                     <div class="p-6 overflow-x-auto">
@@ -111,7 +111,7 @@
                                                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                                                     clip-rule="evenodd"></path>
                                                             </svg>
-                                                            Add new product
+                                                            Add new
                                                         </button>
                                                     </form>
 
@@ -135,4 +135,5 @@
             this.value = parseFloat(this.value).toFixed(2);
         }
     </script>
+    @include('dashboard.layouts.footer')
 @endsection

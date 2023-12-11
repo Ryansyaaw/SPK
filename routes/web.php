@@ -6,6 +6,7 @@ use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\HomeController;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('dashboard.login');
 // });
 Route::prefix('/')->group (function () {
     // Route::get('/', function () {
@@ -34,8 +35,17 @@ Route::prefix('/')->group (function () {
     Route::resource('alternatif', AlternatifController::class);
     Route::resource('penilaian', PenilaianController::class);
     Route::resource('perhitungan', PerhitunganController::class);
-    Route::get('/',[HomeController::class, 'index'])->name('home.index');
+    // Route::get('/register', [AuthController::class, 'register'])->name('register.form');
+    // Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
+    Route::get('/', [AuthController::class, 'login'])->name('login.form');
+    Route::post('/', [AuthController::class, 'loginPost'])->name('login.post');
+    Route::get('/dashboard',[HomeController::class, 'index'])->name('home.index');
     // Route::get('/alternatif', function () {
     //     return view('dashboard.alternatif');
     // })->name('dashboard.alternatif');
+    
+    // Route::group(['middleware' => 'auth'], function () {
+    //     Route::get('/home', [HomeController::class, 'index']);
+    //     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+    // });
 });
