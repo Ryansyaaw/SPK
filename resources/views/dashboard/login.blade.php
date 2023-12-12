@@ -32,10 +32,8 @@
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">
-                            <div class="d-grid" href={{ asset('home')}}>
-                                <button class="btn btn-primary">Login</button>
-                            </div>
-                        </div>
+                            <a class="btn btn-primary d-grid" href="{{ route('home.index') }}">Login</a>
+                        </div>                        
                     </form>
                 </div>
             </div>
