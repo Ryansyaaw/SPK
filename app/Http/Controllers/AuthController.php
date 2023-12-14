@@ -29,23 +29,22 @@ class AuthController extends Controller
 
     public function login()
     {
-        // dd("hello world");
         return view('dashboard.login');
     }
 
     public function loginPost(Request $request)
     {
-        $credetials = [
+        $credentials = [
             'email' => $request->email,
             'password' => $request->password,
         ];
-
-        if (Auth::attempt($credetials)) {
-            return redirect('/home')->with('success', 'Login berhasil');
-        }
-
+    
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home.index')->with('success', 'Login berhasil');
+        }        
+    
         return back()->with('error', 'Email or Password salah');
-    }
+    }    
 
     public function logout()
     {
